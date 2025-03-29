@@ -1,7 +1,7 @@
 openapi: 3.0.4
 info:
   title: Payment API
-  description: API for processing payments in a cinema.
+  description: API for processing payments and managing tickets for movies.
   version: 0.1.9
 
 servers:
