@@ -1,0 +1,125 @@
+openapi: 3.0.4
+info:
+  title: Payment API
+  description: API for processing payments in a cinema.
+  version: 0.1.9
+
+servers:
+  - url: http://CinemasRUs.com/api
+    description: Cinema API server
+
+paths:
+  /verify/{payment}:
+    get:
+      summary: Verify payment status
+      description: Check the status of a payment using the payment info.
+      parameters:
+        - name: payment
+          in: path
+          required: true
+          description: The info of the payment to verify.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment verified successfully.
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid payment info provided.
+          content:
+            application/json:
+              schema:
+                type: string
+  /pay/{payment}:
+    post:
+      summary: Process payment
+      description: Process a payment using the provided payment info.
+      parameters:
+        - name: payment
+          in: path
+          required: true
+          description: The info of the payment to process.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment processed successfully.
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid payment info provided.
+          content:
+            application/json:
+              schema:
+                type: string
+  /createTicket/{movieID}/{seatID}:
+    post:
+      summary: Create a ticket for a movie
+      description: Create a ticket for a specific movie and seat.
+      parameters:
+        - name: movieID
+          in: path
+          required: true
+          description: The ID of the movie.
+          schema:
+            type: string
+        - name: seatID
+          in: path
+          required: true
+          description: The ID of the seat.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ticket created successfully.
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Movie or seat not found.
+          content:
+            application/json:
+              schema:
+                type: string
+    /deleteSeat/{movieID}/{seatID}:
+      delete:
+        summary: Delete a seat for a movie
+        description: Delete a specific seat for a movie.
+        parameters:
+          - name: movieID
+            in: path
+            required: true
+            description: The ID of the movie.
+            schema:
+              type: string
+          - name: seatID
+            in: path
+            required: true
+            description: The ID of the seat.
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Seat deleted successfully.
+            content:
+              application/json:
+                schema:
+                  type: string
+          '404':
+            description: Movie or seat not found.
+            content:
+              application/json:
+                schema:
+                  type: string
+          '400':
+            description: Invalid request.
+            content:
+              application/json:
+                schema:
+                  type: string
